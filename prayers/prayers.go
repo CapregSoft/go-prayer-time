@@ -111,7 +111,7 @@ func (p *Prayer) getDatePrayerTimes(year int, month int, day int, latitude float
 	return p.computeDayTimes()
 }
 func (p *Prayer) GetPrayerTimes(year int, month int, day int, latitude float64, longitude float64, tZone int) []string {
-	//TODO: whether to add 1 in month or not
+
 	return p.getDatePrayerTimes(year, month, day, latitude, longitude, tZone)
 }
 
@@ -154,7 +154,6 @@ func (p *Prayer) computeDayTimes() []string {
 
 	times = p.adjustTimes(times)
 	return p.adjustTimesFormat(times)
-	//TODO: whether to implement tuneTimes
 }
 func (p *Prayer) adjustTimes(times []float64) []float64 {
 	for i := 0; i < len(times); i++ {

@@ -76,7 +76,7 @@ func Darctan2(y float64, x float64) float64 {
 
 // degree arccot
 func Darccot(x float64) float64 {
-	//TODO: confirm the diff atan2 vs atan
+
 	return RadianToDegree(math.Atan2(1.0, x))
 }
 
@@ -118,12 +118,11 @@ func SunPosition(jd float64) []float64 {
 	q := FixAngle(280.459 + 0.98564736*D)
 	L := FixAngle(q + (1.915 * Dsin(g)) + (0.020 * Dsin(2*g)))
 
-	//R := 1.00014 - 0.01671*dcos(g) - 0.00014*dcos(2*g)
 	e := 23.439 - (0.00000036 * D)
 
 	d := Darcsin(Dsin(e) * Dsin(L))
-	//TODO: remove redundant brackets
-	RA := (Darctan2((Dcos(e) * Dsin(L)), (Dcos(L)))) / 15.0
+
+	RA := Darctan2((Dcos(e)*Dsin(L)), (Dcos(L))) / 15.0
 	RA = FixHour(RA)
 	EqT := q/15.0 - RA
 
