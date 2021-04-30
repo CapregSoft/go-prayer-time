@@ -171,7 +171,7 @@ func FloatToTime12(time float64, noSuffix bool) string {
 		suffix = "am"
 	}
 	hours = float64((int(hours)+12-1)%12 + 1)
-	temp := fmt.Sprintf("%d%s%s", int(hours), ":", TwoDigitsFormat(int(minutes)))
+	temp := fmt.Sprintf("%s%s%s", TwoDigitsFormat(int(hours)), ":", TwoDigitsFormat(int(minutes)))
 	if !noSuffix {
 		temp = fmt.Sprintf("%s%s", temp, suffix)
 	}
