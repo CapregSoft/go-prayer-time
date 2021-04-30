@@ -11,7 +11,7 @@ import (
 func main() {
 
 	myDate := time.Now()
-	year, month, day := myDate.Date()
+	//year, month, day := myDate.Date()
 	latitude := 33.57368163412395
 
 	longitude := 73.17308661244054
@@ -29,7 +29,10 @@ func main() {
 		myDate = myDate.Add(time.Hour * 24)
 		//offsets = []int{0, 0, 0, 0, 0, 0, 0} // {Fajr,Sunrise,Dhuhr,Asr,Sunset,Maghrib,Isha}
 		//prayers.tune(offsets)
-		prayerTimes := pray.GetPrayerTimes(year, int(month), (day), latitude, longitude, timezone)
+		//2021-05-24
+		prayerTimes := pray.GetPrayerTimes(2021, 5, 24, latitude, longitude, timezone)
+
+		//prayerTimes := pray.GetPrayerTimes(year, int(month), (day), latitude, longitude, timezone)
 		prayerNames := pray.TimeName
 
 		for i := 0; i < len(prayerTimes); i++ {

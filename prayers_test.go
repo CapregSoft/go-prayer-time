@@ -67,7 +67,7 @@ func TestPrac(t *testing.T) {
 		year, month, day := myDate.Date()
 		prayerTimes := pray.GetPrayerTimes(year, int(month), (day), latitude, longitude, timezone)
 
-		//newprayerTimes remove sun set
+		//newprayerTimes remove sun set from list
 		newprayerTimes := func(prayerTimes []string) []string {
 			temp := make([]string, 6)
 			idx := 0

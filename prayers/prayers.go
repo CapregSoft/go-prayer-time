@@ -148,11 +148,12 @@ func (p *Prayer) computeTimes(times []float64) []float64 {
 func (p *Prayer) computeDayTimes() []string {
 	times := []float64{5, 6, 12, 13, 18, 18, 18} //default times
 
-	for i := 0; i <= p.NumIterations; i++ {
+	for i := 1; i <= p.NumIterations; i++ {
 		times = p.computeTimes(times)
 	}
 
 	times = p.adjustTimes(times)
+
 	return p.adjustTimesFormat(times)
 }
 func (p *Prayer) adjustTimes(times []float64) []float64 {
