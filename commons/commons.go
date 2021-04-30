@@ -93,7 +93,6 @@ func GetTimeZone1() float64 {
 
 // calculate julian date from a calendar date
 func JulianDate(year int, month int, day int) float64 {
-
 	if month <= 2 {
 		year -= 1
 		month += 12
@@ -125,7 +124,6 @@ func SunPosition(jd float64) []float64 {
 	RA := Darctan2((Dcos(e)*Dsin(L)), (Dcos(L))) / 15.0
 	RA = FixHour(RA)
 	EqT := q/15.0 - RA
-
 	return []float64{d, EqT}
 }
 

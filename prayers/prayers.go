@@ -75,7 +75,6 @@ func (p *Prayer) computeMidDay(t float64) float64 {
 
 // compute time for a given angle G
 func (p *Prayer) computeTime(G float64, t float64) float64 {
-	//System.out.println("G: "+G)
 
 	D := commons.SunDeclination(p.JDate + t)
 	Z := p.computeMidDay(t)
@@ -133,7 +132,6 @@ func (p *Prayer) setCustomParams(params []float64) {
 func (p *Prayer) computeTimes(times []float64) []float64 {
 
 	t := p.dayPortion(times)
-
 	Fajr := p.computeTime(180-p.MethodParams[p.CalcMethod][0], t[0])
 	Sunrise := p.computeTime(180-0.833, t[1])
 	Dhuhr := p.computeMidDay(t[2])
@@ -151,10 +149,9 @@ func (p *Prayer) computeDayTimes() []string {
 	for i := 1; i <= p.NumIterations; i++ {
 		times = p.computeTimes(times)
 	}
-
 	times = p.adjustTimes(times)
-
 	return p.adjustTimesFormat(times)
+
 }
 func (p *Prayer) adjustTimes(times []float64) []float64 {
 	for i := 0; i < len(times); i++ {

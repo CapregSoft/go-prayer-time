@@ -30,7 +30,7 @@ func main() {
 		//offsets = []int{0, 0, 0, 0, 0, 0, 0} // {Fajr,Sunrise,Dhuhr,Asr,Sunset,Maghrib,Isha}
 		//prayers.tune(offsets)
 		//2021-05-24
-		prayerTimes := pray.GetPrayerTimes(2021, 5, 24, latitude, longitude, timezone)
+		prayerTimes := pray.GetPrayerTimes(2021, 5, 6, latitude, longitude, timezone)
 
 		//prayerTimes := pray.GetPrayerTimes(year, int(month), (day), latitude, longitude, timezone)
 		prayerNames := pray.TimeName
