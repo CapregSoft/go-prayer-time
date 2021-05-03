@@ -34,6 +34,16 @@ type Prayer struct {
 
 }
 
+type PrayerData struct {
+	Fajar   string `json:"fajar"`
+	Sunrise string `json:"sunrise"`
+	Dhuhr   string `json:"dhuhr"`
+	Asr     string `json:"asr"`
+	Sunset  string `json:"sunset"`
+	Maghrib string `json:"maghrib"`
+	Isha    string `json:"isha"`
+}
+
 func (p *Prayer) Init() {
 
 	p.CalcMethod = 3
@@ -112,6 +122,20 @@ func (p *Prayer) getDatePrayerTimes(year int, month int, day int, latitude float
 func (p *Prayer) GetPrayerTimes(year int, month int, day int, latitude float64, longitude float64, tZone int) []string {
 
 	return p.getDatePrayerTimes(year, month, day, latitude, longitude, tZone)
+}
+
+func (p *Prayer) GetPrayerTimesAsObject(year int, month int, day int, latitude float64, longitude float64, tZone int) PrayerData {
+
+	pray := p.getDatePrayerTimes(year, month, day, latitude, longitude, tZone)
+	return PrayerData{
+		Fajar:   pray[0],
+		Sunrise: pray[1],
+		Dhuhr:   pray[2],
+		Asr:     pray[3],
+		Sunset:  pray[4],
+		Maghrib: pray[5],
+		Isha:    pray[6],
+	}
 }
 
 // set custom values for calculation parameters

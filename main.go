@@ -32,6 +32,7 @@ func main() {
 		//2021-05-24
 		prayerTimes := pray.GetPrayerTimes(2021, 5, 6, latitude, longitude, timezone)
 
+		//prayerTimesAsStruct := pray.GetPrayerTimesAsStruct(2021, 5, 6, latitude, longitude, timezone)
 		//prayerTimes := pray.GetPrayerTimes(year, int(month), (day), latitude, longitude, timezone)
 		prayerNames := pray.TimeName
 
