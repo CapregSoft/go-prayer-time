@@ -18,6 +18,9 @@ func main() {
 	timezone := 5
 	// Test Prayer times here
 	//PrayTime prayers = new PrayTime();
+	//p := prayers.New()
+	fmt.Println(constants.KARACHI == 1)
+
 	pray := &prayers.Prayer{}
 	pray.Init()
 	pray.TimeFormat = constants.TIME_12_NS

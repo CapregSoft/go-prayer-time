@@ -6,6 +6,7 @@ import (
 
 	"github.com/CapregSoft/go-prayer-time/commons"
 	"github.com/CapregSoft/go-prayer-time/constants"
+	"github.com/CapregSoft/go-prayer-time/model"
 )
 
 type Prayer struct {
@@ -34,16 +35,38 @@ type Prayer struct {
 
 }
 
-type PrayerData struct {
-	Fajar   string `json:"fajar"`
-	Sunrise string `json:"sunrise"`
-	Dhuhr   string `json:"dhuhr"`
-	Asr     string `json:"asr"`
-	Sunset  string `json:"sunset"`
-	Maghrib string `json:"maghrib"`
-	Isha    string `json:"isha"`
-}
+func New() *Prayer {
+	p := &Prayer{
 
+		DhuhrMinutes:   0,
+		TimeFormat:     constants.TIME_24,
+		CalcMethod:     constants.KARACHI,
+		AsrJuristic:    constants.HANAFI,
+		AdjustHighLats: constants.ANGLE_BASED,
+		NumIterations:  1,
+		Offsets:        []int{0, 0, 0, 0, 0, 0, 0},
+		TimeName: []string{
+			"Fajr",
+			"Sunrise",
+			"Dhuhr",
+			"Asr",
+			"Sunset",
+			"Maghrib",
+			"Isha",
+		},
+		MethodParams: map[int][]float64{
+			constants.JAFARI:  {16, 0, 4, 0, 14},
+			constants.KARACHI: {18, 1, 0, 0, 18},
+			constants.ISNA:    {15, 1, 0, 0, 15},
+			constants.MWL:     {18, 1, 0, 0, 17},
+			constants.MAKKAH:  {18.5, 1, 0, 1, 90},
+			constants.EGYPT:   {19.5, 1, 0, 0, 17.5},
+			constants.TEHRAN:  {17.7, 0, 4.5, 0, 14},
+			constants.CUSTOM:  {18, 1, 0, 0, 17},
+		},
+	}
+	return p
+}
 func (p *Prayer) Init() {
 
 	p.CalcMethod = 3
@@ -118,24 +141,6 @@ func (p *Prayer) getDatePrayerTimes(year int, month int, day int, latitude float
 	p.TimeZone = tZone
 	p.JDate = commons.JulianDate(year, month, day) - (longitude / (15.0 * 24.0))
 	return p.computeDayTimes()
-}
-func (p *Prayer) GetPrayerTimes(year int, month int, day int, latitude float64, longitude float64, tZone int) []string {
-
-	return p.getDatePrayerTimes(year, month, day, latitude, longitude, tZone)
-}
-
-func (p *Prayer) GetPrayerTimesAsObject(year int, month int, day int, latitude float64, longitude float64, tZone int) PrayerData {
-
-	pray := p.getDatePrayerTimes(year, month, day, latitude, longitude, tZone)
-	return PrayerData{
-		Fajar:   pray[0],
-		Sunrise: pray[1],
-		Dhuhr:   pray[2],
-		Asr:     pray[3],
-		Sunset:  pray[4],
-		Maghrib: pray[5],
-		Isha:    pray[6],
-	}
 }
 
 // set custom values for calculation parameters
@@ -272,4 +277,23 @@ func (p *Prayer) dayPortion(times []float64) []float64 {
 		times[i] /= 24
 	}
 	return times
+}
+
+func (p *Prayer) GetPrayerTimes(year int, month int, day int, latitude float64, longitude float64, tZone int) []string {
+
+	return p.getDatePrayerTimes(year, month, day, latitude, longitude, tZone)
+}
+
+func (p *Prayer) GetPrayerTimesAsObject(year int, month int, day int, latitude float64, longitude float64, tZone int) model.PrayerData {
+
+	pray := p.getDatePrayerTimes(year, month, day, latitude, longitude, tZone)
+	return model.PrayerData{
+		Fajar:   pray[0],
+		Sunrise: pray[1],
+		Dhuhr:   pray[2],
+		Asr:     pray[3],
+		Sunset:  pray[4],
+		Maghrib: pray[5],
+		Isha:    pray[6],
+	}
 }
