@@ -20,7 +20,7 @@ type Prayer struct {
 
 	Lat      float64 // latitude
 	Lng      float64 // longitude
-	TimeZone int     // time-zone
+	TimeZone float64 // time-zone
 	JDate    float64 // Julian date
 
 	//Times   []int
@@ -135,7 +135,7 @@ func (p *Prayer) computeAsr(step int, t float64) float64 { // Shafii: step=1, Ha
 // -------------------- Interface Functions --------------------
 // return prayer times for a given date
 
-func (p *Prayer) getDatePrayerTimes(year int, month int, day int, latitude float64, longitude float64, tZone int) []string {
+func (p *Prayer) getDatePrayerTimes(year int, month int, day int, latitude float64, longitude float64, tZone float64) []string {
 	p.Lat = latitude
 	p.Lng = longitude
 	p.TimeZone = tZone
@@ -279,12 +279,12 @@ func (p *Prayer) dayPortion(times []float64) []float64 {
 	return times
 }
 
-func (p *Prayer) GetPrayerTimes(year int, month int, day int, latitude float64, longitude float64, tZone int) []string {
+func (p *Prayer) GetPrayerTimes(year int, month int, day int, latitude float64, longitude float64, tZone float64) []string {
 
 	return p.getDatePrayerTimes(year, month, day, latitude, longitude, tZone)
 }
 
-func (p *Prayer) GetPrayerTimesAsObject(year int, month int, day int, latitude float64, longitude float64, tZone int) model.PrayerData {
+func (p *Prayer) GetPrayerTimesAsObject(year int, month int, day int, latitude float64, longitude float64, tZone float64) model.PrayerData {
 
 	pray := p.getDatePrayerTimes(year, month, day, latitude, longitude, tZone)
 	return model.PrayerData{

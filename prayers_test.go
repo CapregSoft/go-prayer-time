@@ -51,7 +51,7 @@ func TestPrac(t *testing.T) {
 	latitude := 33.57368163412395
 
 	longitude := 73.17308661244054
-	timezone := 5
+	timezone := 5.0
 
 	pray := &prayers.Prayer{}
 	pray.Init()

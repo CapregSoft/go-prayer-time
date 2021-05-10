@@ -15,7 +15,7 @@ func main() {
 	latitude := 33.57368163412395
 
 	longitude := 73.17308661244054
-	timezone := 5
+	timezone := 5.0
 	// Test Prayer times here
 	//PrayTime prayers = new PrayTime();
 	//p := prayers.New()
